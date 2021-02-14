@@ -3,10 +3,12 @@
     <h1>Weather App</h1>
     <button @click="weatherPicker">Check the temperature</button>
     <div class="weather-check__description" v-show="visible">
-      <p> The temperature in {{ currentWeather.location }} is
+      <p class="weather-check__paragraph--general">
+        The temperature in {{ currentWeather.location }} is
         {{ currentWeather.temperature }}
       </p>
-      <p v-if="locatedInGlasgow">
+      <p class="weather-check__paragraph--glasgow-specific
+        "v-if="locatedInGlasgow">
           You should wear a {{ clothesAdvice }}
       </p>
     </div>

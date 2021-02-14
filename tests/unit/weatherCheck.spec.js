@@ -25,6 +25,29 @@ describe('WeatherCheck.vue', () => {
     });
   });
 
+  describe('when the user has hit the button', () => {
+    beforeEach(() => {
+      let button = wrapper.find('button');
+
+      button.trigger('click');
+      wrapper.setData({ weatherPicker: 'Glasgow'  });
+    });
+
+    it('allows to click the button', () => {
+      expect(wrapper.find('.weather-check__description')
+        .isVisible()).toBe(true);
+    });
+
+    it('displays additional information for glasgow',  () => {
+      expect(wrapper.find('.weather-check__paragraph--glasgow-specific')
+        .isVisible()).toBe(true);
+    });
 
 
-})
+    it('advises to wear a tshirt if temperature > 15', () =>  {
+      wrapper.setData({ weatherPicker: 20 });
+      let paragraph = wrapper.find('.weather-check__paragraph--glasgow-specific');
+      expect(paragraph.text()).toMatch('You should wear a t-shirt');
+    });
+  });
+});
