@@ -6,6 +6,24 @@ describe('WeatherCheck.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(WeatherCheck, {
+      weatherData: [
+        {
+          "location" : "Edinburgh",
+          "temperature" : 10
+        },
+        {
+          "location" : "Glasgow",
+          "temperature" : 15
+        },
+        {
+          "location" : "Glasgow",
+          "temperature" : 10
+        },
+        {
+          "location" : "Glasgow",
+          "temperature" : 25
+        }
+      ],
     })
   });
 
@@ -46,7 +64,8 @@ describe('WeatherCheck.vue', () => {
 
     it('advises to wear a tshirt if temperature > 15', () =>  {
       wrapper.setData({ weatherPicker: 20 });
-      let paragraph = wrapper.find('.weather-check__paragraph--glasgow-specific');
+      let paragraph;
+      paragraph = wrapper.find('.weather-check__paragraph--glasgow-specific');
       expect(paragraph.text()).toMatch('You should wear a t-shirt');
     });
   });

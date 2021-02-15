@@ -2,13 +2,13 @@
   <div class="weather-check">
     <h1>Weather App</h1>
     <button @click="weatherPicker">Check the temperature</button>
-    <div class="weather-check__description" v-show="visible">
+    <div class="weather-check__description" v-if="visible">
       <p class="weather-check__paragraph--general">
         The temperature in {{ currentWeather.location }} is
         {{ currentWeather.temperature }}
       </p>
-      <p class="weather-check__paragraph--glasgow-specific
-        "v-if="locatedInGlasgow">
+      <p class="weather-check__paragraph--glasgow-specific"
+        v-show="clothesAdvice" >
           You should wear a {{ clothesAdvice }}
       </p>
     </div>
@@ -60,17 +60,12 @@ export default {
   },
 
   computed: {
-    locatedInGlasgow(){
-      return this.currentWeather.location === 'Glasgow';
-    },
-
     clothesAdvice(){
-      return this.currentWeather.temperature >= 15 ? 't-shirt' :  'jumper';
+      if (this.currentWeather.location === 'Glasgow'){
+        return this.currentWeather.temperature >= 15 ? 't-shirt' :  'jumper';
+      }
+      return '';
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
